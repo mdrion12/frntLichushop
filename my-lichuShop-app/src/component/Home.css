@@ -1,0 +1,101 @@
+/* Make body & html full height */
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* General */
+.home-container {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Hero Section with Fullscreen Background Image */
+.hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    /* full window height */
+    min-height: 100vh;
+    width: 100%;
+    text-align: center;
+    background-image: url('../assets/litchi-hero.png');
+    /* background image path */
+    background-size: cover;
+    /* cover full area */
+    background-position: center;
+    /* center the image */
+    background-repeat: no-repeat;
+    color: #fff;
+    padding: 0 20px;
+    position: relative;
+}
+
+/* Optional overlay for better text visibility */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    /* dark overlay */
+    z-index: 1;
+}
+
+.hero-text {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-text h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.hero-text p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.hero-text .btn {
+    display: inline-block;
+    background-color: #ff5252;
+    color: #fff;
+    padding: 14px 28px;
+    font-size: 1.1rem;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.hero-text .btn:hover {
+    background-color: #d32f2f;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero {
+        height: 100vh;
+        /* keep full screen on mobile */
+        padding: 0 10px;
+    }
+
+    .hero-text h1 {
+        font-size: 2rem;
+    }
+
+    .hero-text p {
+        font-size: 1rem;
+    }
+}
