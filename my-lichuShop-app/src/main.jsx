@@ -15,7 +15,8 @@ import {
 import { AuthProvider } from './component/AuthContext.jsx'
 import Dashboard from './component/Dashboard.jsx'
 import PrivateRoute from './component/PrivateRoute.jsx'
-
+import Dproducts from './component/Dashboardfile/Dproducts.jsx'
+import Dorder from './component/Dashboardfile/Dorder.jsx'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -42,14 +43,27 @@ const router = createBrowserRouter([
         path: "login",
         element: <Login />,
       },
-
     ]
   },
   {
     path: "dashboard/",
     element: <PrivateRoute>
       <Dashboard></Dashboard>
-    </PrivateRoute>
+    </PrivateRoute>,
+    children: [
+      {
+        path: "product",
+        element: <PrivateRoute >
+          <Dproducts></Dproducts>
+        </PrivateRoute >
+      },
+      {
+        path: "order",
+        element: <PrivateRoute >
+          <Dorder></Dorder>
+        </PrivateRoute >
+      }
+    ]
   }
 ])
 

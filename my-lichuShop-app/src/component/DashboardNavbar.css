@@ -1,0 +1,33 @@
+.dashboard-navbar {
+    width: 100%;
+    background-color: #2563eb;
+    /* blue background */
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.dashboard-navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    /* spacing between links */
+    margin: 0;
+    padding: 0;
+}
+
+.dashboard-navbar ul a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dashboard-navbar ul a:hover {
+    background-color: white;
+    color: #2563eb;
+}

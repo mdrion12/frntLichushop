@@ -1,0 +1,13 @@
+.dproducts-container {
+    display: flex;
+    /* flex layout enable */
+    flex-wrap: wrap;
+    /* overflow হলে next line এ যাবে */
+    gap: 20px;
+    /* card এর মধ্যে gap */
+    justify-content: center;
+    /* horizontally centered */
+    padding: 20px;
+    background-color: #f9fafb;
+    /* light background */
+}

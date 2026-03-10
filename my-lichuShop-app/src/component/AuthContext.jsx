@@ -6,7 +6,9 @@ export const useauth = () => useContext(Authcontext);
 
 export const AuthProvider = ({ children }) => {
 
-    const [isLogin, setisLogin] = useState(false)
+    const [isLogin, setisLogin] = useState(() => {
+        return localStorage.getItem("access") ? true : false;
+    })
     const login = () => {
         setisLogin(true);
     };
