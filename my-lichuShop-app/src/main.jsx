@@ -5,11 +5,16 @@ import App from './App.jsx'
 import Home from './component/Home.jsx'
 import Products from './component/Products.jsx'
 import Cart from './component/Cart.jsx'
+import Login from './component/Login.jsx'
 
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+
+import { AuthProvider } from './component/AuthContext.jsx'
+import Dashboard from './component/Dashboard.jsx'
+import PrivateRoute from './component/PrivateRoute.jsx'
 
 const router = createBrowserRouter([
   {
@@ -17,29 +22,41 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { index: true, element: <Home /> },
+
       {
-        path: "home/",
+        path: "home",
         element: <Home />
       },
+
       {
-        path: "products/",
+        path: "products",
         element: <Products />
       },
-      {
-        path: "products/:id",
-        element: <Products />
-      },
+
       {
         path: "cart",
         element: <Cart />
       },
 
+      {
+        path: "login",
+        element: <Login />,
+      },
+
     ]
+  },
+  {
+    path: "dashboard/",
+    element: <PrivateRoute>
+      <Dashboard></Dashboard>
+    </PrivateRoute>
   }
 ])
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router}></RouterProvider>
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </StrictMode>
 )

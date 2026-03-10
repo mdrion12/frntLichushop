@@ -26,7 +26,7 @@ const ProductCart = ({ data, addToCart }) => {
                     {data.stock > 0 ? 'Add to Cart' : 'Unavailable'}
                 </button>
             </div>
-        </div>
+        </div >
     );
 };
 
