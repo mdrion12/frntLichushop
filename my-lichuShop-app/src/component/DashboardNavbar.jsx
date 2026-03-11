@@ -8,6 +8,7 @@ const DashboardNavbar = () => {
             <ul>
                 <li><Link to={"product"}>Products</Link></li>
                 <li><Link to={"order"}>Order</Link></li>
+                <li><Link to={"createproduct"}>create product</Link></li>
             </ul>
         </div>
     );

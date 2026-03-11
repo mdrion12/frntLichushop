@@ -18,6 +18,8 @@ import PrivateRoute from './component/PrivateRoute.jsx'
 import Dproducts from './component/Dashboardfile/Dproducts.jsx'
 import Dorder from './component/Dashboardfile/Dorder.jsx'
 import DorderDetails from './component/Dashboardfile/DorderDetails.jsx'
+import ProductCreate from './component/Product/ProductCreate.jsx'
+import ProductUpdate from './component/Product/ProductUpdate.jsx'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -69,7 +71,20 @@ const router = createBrowserRouter([
         element: <PrivateRoute >
           <DorderDetails></DorderDetails>
         </PrivateRoute >
-      }
+      },
+      {
+        path: "createproduct",
+        element: <PrivateRoute >
+          <ProductCreate></ProductCreate>
+        </PrivateRoute >
+      },
+      {
+        path: "productUpdate/:id",
+        element: <PrivateRoute >
+          <ProductUpdate></ProductUpdate>
+        </PrivateRoute >
+      },
+
     ]
   }
 

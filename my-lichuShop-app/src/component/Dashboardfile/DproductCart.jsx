@@ -1,7 +1,34 @@
 import React from 'react';
 import "./DproductCart.css";
+import { Link } from 'react-router-dom';
 
 const DproductCart = ({ data }) => {
+    const accessToken = localStorage.getItem("access");
+    const handleDelete = async () => {
+        if (!window.confirm("Are you sure you want to delete this product?")) return;
+        try {
+            const res = await fetch(`https://lichushop-1.onrender.com/productUpdate/${data.id}/`, {
+                method: "DELETE",
+                headers: {
+                    "Authorization": `Bearer ${accessToken}`,
+                },
+            });
+
+            if (res.ok) {
+                alert("Product deleted successfully!");
+                // optionally reload page or update state
+                // window.location.reload();
+            } else {
+                const err = await res.json();
+                console.log(err);
+                alert("Failed to delete product");
+            }
+        } catch (error) {
+            console.log(error);
+            alert("Error deleting product");
+        }
+    };
+
     return (
         <div className="product-card">
             <div className="product-image">
@@ -16,7 +43,10 @@ const DproductCart = ({ data }) => {
                 <p className={`product-stock ${data.stock > 0 ? "in-stock" : "out-of-stock"}`}>
                     {data.stock > 0 ? `In Stock: ${data.stock}` : "Out of Stock"}
                 </p>
-                <button className="add-to-cart">Add to Cart</button>
+                <button className="update">
+                    <Link to={`/dashboard/productUpdate/${data.id}`}>update</Link>
+                </button>
+                <button onClick={handleDelete} className="update">delete</button>
             </div>
         </div>
     );

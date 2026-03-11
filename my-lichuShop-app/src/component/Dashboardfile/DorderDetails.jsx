@@ -4,21 +4,21 @@ import "./DorderDetails.css";
 
 const DorderDetails = () => {
     const { id } = useParams();
-    const [data, setdata] = useState(null);
-    const accesstoken = localStorage.getItem("access");
+    const [data, setData] = useState(null);
+    const accessToken = localStorage.getItem("access");
 
     useEffect(() => {
         fetch(`https://lichushop-1.onrender.com/orderdetails/${id}`, {
             method: "GET",
             headers: {
-                "Content-type": "application/json",
-                "Authorization": `Bearer ${accesstoken}`
-            }
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${accessToken}`,
+            },
         })
             .then(res => res.json())
-            .then(item => setdata(item))
-            .catch(e => console.log(e))
-    }, [id, accesstoken]);
+            .then(item => setData(item))
+            .catch(e => console.log(e));
+    }, [id, accessToken]);
 
     if (!data) return <div>Loading...</div>;
 
@@ -39,7 +39,6 @@ const DorderDetails = () => {
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Image</th>
                             <th>Product Name</th>
                             <th>Description</th>
                             <th>Price</th>
@@ -48,27 +47,22 @@ const DorderDetails = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {data.productlist.map((product, index) => (
-                            <tr key={index}>
-                                <td>{index + 1}</td>
-                                <td>
-                                    {product.product_image ? (
-                                        <img
-                                            src={product.product_image}
-                                            alt={product.product_name}
-                                            className="product-img"
-                                        />
-                                    ) : (
-                                        <span>N/A</span>
-                                    )}
-                                </td>
-                                <td>{product.product_name}</td>
-                                <td>{product.product_description}</td>
-                                <td>{product.product_price}</td>
-                                <td>{product.quantity}</td>
-                                <td>{product.product_price * product.quantity}</td>
+                        {data.productlist && data.productlist.length > 0 ? (
+                            data.productlist.map((product, index) => (
+                                <tr key={index}>
+                                    <td>{index + 1}</td>
+                                    <td>{product.product_name}</td>
+                                    <td>{product.product_description}</td>
+                                    <td>{product.product_price}</td>
+                                    <td>{product.quantity}</td>
+                                    <td>{product.product_price * product.quantity}</td>
+                                </tr>
+                            ))
+                        ) : (
+                            <tr>
+                                <td colSpan="6" style={{ textAlign: "center" }}>No products found</td>
                             </tr>
-                        ))}
+                        )}
                     </tbody>
                 </table>
             </div>

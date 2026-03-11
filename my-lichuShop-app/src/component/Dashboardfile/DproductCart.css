@@ -68,7 +68,7 @@
     /* red */
 }
 
-.add-to-cart {
+.update {
     padding: 10px;
     background-color: #2563eb;
     color: white;
@@ -79,6 +79,6 @@
     transition: background-color 0.3s ease;
 }
 
-.add-to-cart:hover {
+.update:hover {
     background-color: #1d4ed8;
 }
