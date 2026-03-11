@@ -17,6 +17,7 @@ import Dashboard from './component/Dashboard.jsx'
 import PrivateRoute from './component/PrivateRoute.jsx'
 import Dproducts from './component/Dashboardfile/Dproducts.jsx'
 import Dorder from './component/Dashboardfile/Dorder.jsx'
+import DorderDetails from './component/Dashboardfile/DorderDetails.jsx'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -62,9 +63,16 @@ const router = createBrowserRouter([
         element: <PrivateRoute >
           <Dorder></Dorder>
         </PrivateRoute >
+      },
+      {
+        path: "order/:id",
+        element: <PrivateRoute >
+          <DorderDetails></DorderDetails>
+        </PrivateRoute >
       }
     ]
   }
+
 ])
 
 createRoot(document.getElementById('root')).render(

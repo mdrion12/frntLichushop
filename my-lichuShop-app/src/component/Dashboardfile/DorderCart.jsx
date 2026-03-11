@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import "./DorderCart.css";
+import { Link } from 'react-router-dom';
 
 const STATUS_CHOICES = [
     "pending",
@@ -9,10 +10,8 @@ const STATUS_CHOICES = [
 ];
 
 const DorderCart = ({ data }) => {
-
     const [status, setStatus] = useState(data.status);
     const [selectedStatus, setSelectedStatus] = useState(data.status);
-
     const changeStatus = async () => {
 
         const accessToken = localStorage.getItem("access");
@@ -42,34 +41,38 @@ const DorderCart = ({ data }) => {
     };
 
     return (
-        <div className="order-card">
+        <div className="order-row">
 
-            <p><strong>Order ID:</strong> {data.id}</p>
+            <p>{data.id}</p>
 
-            <p><strong>Phone:</strong> {data.phone_number?.number || "N/A"}</p>
+            <p>{data.phone_number?.number || "N/A"}</p>
 
-            <p><strong>Total Price:</strong> {data.total_price}</p>
+            <p>{data.total_price}</p>
 
-            <p>
-                <strong>Status:</strong>
-                <span className="status-text">{status}</span>
+            <p className={`status ${status}`}>
+                {status}
             </p>
 
-            <p><strong>Created:</strong> {new Date(data.created_at).toLocaleString()}</p>
+            <p>{new Date(data.created_at).toLocaleString()}</p>
 
-            <select
-                value={selectedStatus}
-                onChange={(e) => setSelectedStatus(e.target.value)}
-                className="status-select"
-            >
-                {STATUS_CHOICES.map(s => (
-                    <option key={s} value={s}>{s}</option>
-                ))}
-            </select>
+            <div className="status-action">
 
-            <button className="status-btn" onClick={changeStatus}>
-                Submit
-            </button>
+                <select
+                    value={selectedStatus}
+                    onChange={(e) => setSelectedStatus(e.target.value)}
+                >
+                    {STATUS_CHOICES.map(s => (
+                        <option key={s} value={s}>{s}</option>
+                    ))}
+                </select>
+
+                <button onClick={changeStatus}>
+                    Update
+                </button>
+                <button  >
+                    <Link to={`${data.id}`}>details</Link>
+                </button>
+            </div>
 
         </div>
     );
