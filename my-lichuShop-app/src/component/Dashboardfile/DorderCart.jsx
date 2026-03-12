@@ -13,7 +13,7 @@ const DorderCart = ({ data }) => {
     const [status, setStatus] = useState(data.status);
     const [selectedStatus, setSelectedStatus] = useState(data.status);
     const changeStatus = async () => {
-
+        console.log(data);
         const accessToken = localStorage.getItem("access");
 
         try {
@@ -43,9 +43,9 @@ const DorderCart = ({ data }) => {
     return (
         <div className="order-row">
 
-            <p>{data.id}</p>
+            <p>{data.phone_number.name}</p>
 
-            <p>{data.phone_number?.number || "N/A"}</p>
+            <p>{data.phone_number.phone_number || "N/A"}</p>
 
             <p>{data.total_price}</p>
 

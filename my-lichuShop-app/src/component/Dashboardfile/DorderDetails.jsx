@@ -29,7 +29,7 @@ const DorderDetails = () => {
                 <h2>Customer Details</h2>
                 <p><strong>Name:</strong> {data.customer_name}</p>
                 <p><strong>Phone:</strong> {data.phone_number}</p>
-                <p><strong>Address:</strong> {data.Objectaddress}</p>
+                <p><strong>Address:</strong> {data.address}</p>
             </div>
 
             {/* Products Table */}

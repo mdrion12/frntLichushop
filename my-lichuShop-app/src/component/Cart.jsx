@@ -3,8 +3,7 @@ import { CartContext } from './CartContext';
 import './Cart.css';
 
 const Cart = () => {
-
-    const { cart, removeFromCart, clearCart } = useContext(CartContext);
+    const { cart, removeFromCart, clearCart, addToCart, decreaseQuantity } = useContext(CartContext);
 
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
@@ -13,7 +12,6 @@ const Cart = () => {
     const [loading, setLoading] = useState(false);
 
     const handleOrder = async () => {
-
         if (!name || !phone || !address) {
             alert("Please fill all fields");
             return;
@@ -21,50 +19,50 @@ const Cart = () => {
 
         const payload = {
             Customer: {
-                name: name,
+                name,
                 phone_number: phone,
-                address: address
+                address
             },
             product: cart.map(item => ({
-                product_id: item.id,
-                quantity: 1
+                product_id: Number(item.id),
+                quantity: Number(item.quantity)
             }))
         };
 
         console.log("Sending payload:", payload);
 
         try {
-
             setLoading(true);
 
             const response = await fetch(
                 "https://lichushop-1.onrender.com/ordercreation/",
                 {
                     method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
+                    headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(payload)
                 }
             );
 
-            const data = await response.json();
-            console.log("Server response:", data);
-
             if (!response.ok) {
-                alert("Order failed");
+                const text = await response.text();
+                console.error("Order failed:", text);
+                alert("Order failed. Check console for details.");
+                setLoading(false);
                 return;
             }
+
+            const data = await response.json();
+            console.log("Server response:", data);
 
             setOrderPlaced(true);
             clearCart();
 
         } catch (error) {
-            console.log(error);
-            alert("Order error");
+            console.error("Order error:", error);
+            alert("Order error. See console.");
+        } finally {
+            setLoading(false);
         }
-
-        setLoading(false);
     };
 
     if (cart.length === 0 && !orderPlaced) {
@@ -79,24 +77,22 @@ const Cart = () => {
                     <h2>My Cart ({cart.length})</h2>
 
                     {cart.map((item) => (
-
                         <div key={item.id} className="cart-item">
-
                             <h4>{item.product_name}</h4>
                             <p>৳ {item.price}</p>
+                            <p>
+                                Quantity: {item.quantity} &nbsp;
+                                <button onClick={() => decreaseQuantity(item.id)}>-</button>
+                                <button onClick={() => addToCart(item)}>+</button>
+                            </p>
 
-                            <button
-                                onClick={() => removeFromCart(item.id)}
-                            >
+                            <button onClick={() => removeFromCart(item.id)}>
                                 Remove
                             </button>
-
                         </div>
-
                     ))}
 
                     <div className="order-form">
-
                         <h3>Place Order</h3>
 
                         <input
@@ -105,14 +101,12 @@ const Cart = () => {
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                         />
-
                         <input
                             type="text"
                             placeholder="Phone"
                             value={phone}
                             onChange={(e) => setPhone(e.target.value)}
                         />
-
                         <input
                             type="text"
                             placeholder="Address"
@@ -121,26 +115,17 @@ const Cart = () => {
                         />
 
                         <button onClick={handleOrder} disabled={loading}>
-
                             {loading ? "Ordering..." : "Place Order"}
-
                         </button>
-
                     </div>
                 </>
             ) : (
-
                 <div>
-
                     <h2>Order Successful 🎉</h2>
-
                     <p>Thank you {name}</p>
                     <p>We will call you at {phone}</p>
-
                 </div>
-
             )}
-
         </div>
     );
 };
