@@ -20,6 +20,7 @@ import Dorder from './component/Dashboardfile/Dorder.jsx'
 import DorderDetails from './component/Dashboardfile/DorderDetails.jsx'
 import ProductCreate from './component/Product/ProductCreate.jsx'
 import ProductUpdate from './component/Product/ProductUpdate.jsx'
+import ProductDetails from './component/ProductDetails.jsx'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -36,7 +37,10 @@ const router = createBrowserRouter([
         path: "products",
         element: <Products />
       },
-
+      {
+        path: "product/:id",
+        element: <ProductDetails></ProductDetails>
+      },
       {
         path: "cart",
         element: <Cart />

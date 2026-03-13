@@ -1,5 +1,6 @@
 import React from 'react';
 import './ProductCart.css';
+import { Link } from 'react-router-dom';
 
 const ProductCart = ({ data, addToCart }) => {
     return (
@@ -20,11 +21,13 @@ const ProductCart = ({ data, addToCart }) => {
 
                 <button
                     className="add-to-cart"
-                    disabled={!data.is_active || data.stock === 0}
+                    disabled={data.stock === 0}
                     onClick={() => addToCart(data)}
                 >
                     {data.stock > 0 ? 'Add to Cart' : 'Unavailable'}
                 </button>
+                <button className="add-to-cart">
+                    <Link to={`/product/${data.id}`}>details</Link> </button>
             </div>
         </div >
     );
